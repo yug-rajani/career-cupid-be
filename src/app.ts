@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(bodyParser.json({ limit: '50mb', type: 'application/json' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-const port = 5000;
+const port = 4000;
 
 // connect to database
 connectToDB();
@@ -23,6 +23,6 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.listen(process.env.PORT || 5000, () => {
+app.listen(process.env.PORT || 4000, () => {
   return console.log(`Express is listening at http://localhost:${port}`);
 });
