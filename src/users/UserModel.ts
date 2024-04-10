@@ -16,6 +16,7 @@ export interface IUser extends mongoose.Document {
   password: string;
   email: string;
   created_at: number;
+  updated_at: number;
   role: Role;
 }
 
@@ -25,14 +26,14 @@ const UserSchema: mongoose.Schema<IUser> = new mongoose.Schema({
   username: { type: String, unique: true, required: true, trim: true },
   password: { type: String, required: true, trim: true },
   email: { type: String, unique: true, required: true, trim: true },
-  role: { type: String, default: Role.SEEKER, enum: Object.values(Role), required: true },
   created_at: { type: Number, required: true, default: Date.now() },
+  updated_at: { type: Number, required: true, default: Date.now() },
+  role: { type: String, default: Role.SEEKER, enum: Object.values(Role), required: true },
 });
 
 UserSchema.pre("save", async function (next) {
-  const user = this;
-  if (user.isModified("password")) {
-    user.password = await bcrypt.hash(user.password, saltRounds);
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, saltRounds);
   }
   next();
 });
