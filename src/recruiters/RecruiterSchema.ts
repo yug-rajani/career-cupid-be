@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 export interface IRecruiter extends mongoose.Document {
+  user: mongoose.Types.ObjectId;
   email: string;
   company: string;
   city: string;
@@ -14,6 +15,7 @@ export interface IRecruiter extends mongoose.Document {
 }
 
 const RecruiterSchema: mongoose.Schema<IRecruiter> = new mongoose.Schema({
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   email: { type: String, unique: true, required: true, trim: true },
   company: { type: String, required: true, trim: true },
   city: { type: String, required: true, trim: true },
@@ -24,6 +26,7 @@ const RecruiterSchema: mongoose.Schema<IRecruiter> = new mongoose.Schema({
   bio: { type: String, required: true },
   profile_picture: { type: String, required: true },
   approved: { type: Boolean, default: false },
-});
+},
+  { collection: "recruiters" });
 
 export default RecruiterSchema;

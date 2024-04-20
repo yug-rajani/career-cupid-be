@@ -7,7 +7,15 @@ export const createSeeker = (seeker: ISeeker) => {
 };
 
 export const findAllSeekers = () => seekerModel.find();
-export const findSeekerById = (seekerId: String) => seekerModel.findById(seekerId);
-export const updateSeeker = (seekerId: String, seeker: ISeeker) =>
+
+export const findSeekerById = (seekerId) =>
+  seekerModel.findById(seekerId);
+
+export const updateSeeker = (seekerId, seeker: ISeeker) =>
   seekerModel.updateOne({ _id: seekerId }, { $set: seeker });
-export const deleteSeeker = (seekerId: String) => seekerModel.deleteOne({ _id: seekerId });
+
+export const deleteSeeker = (seekerId) =>
+  seekerModel.deleteOne({ _id: seekerId });
+
+export const findSeekerByCriteria = (criteria) =>
+  seekerModel.find(criteria);
