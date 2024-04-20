@@ -17,7 +17,7 @@ export interface ISeeker extends mongoose.Document {
 }
 
 const SeekerSchema: mongoose.Schema<ISeeker> = new mongoose.Schema({
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "Users", required: true },
     email: { type: String, unique: true, required: true, trim: true },
     city: { type: String, required: true, trim: true },
     state: { type: String, required: true, trim: true },
@@ -30,6 +30,8 @@ const SeekerSchema: mongoose.Schema<ISeeker> = new mongoose.Schema({
     resume: { type: String, required: true },
     bio: { type: String, required: true },
     profile_picture: { type: String, required: true }
-});
+},
+    { collection: "seekers" }
+);
 
 export default SeekerSchema;

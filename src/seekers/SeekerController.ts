@@ -1,9 +1,19 @@
 import { Request, Response } from "express";
 import { getErrorMessage } from "../utils/ErrorMessages";
 import * as seekerServices from "./SeekerService";
+import { ISeeker } from "./SeekerSchema";
+import * as userServices from "../users/UserService";
 
 export const createSeeker = async (req: Request, res: Response) => {
     try {
+        const seekerData: ISeeker = req.body;
+
+        // TODO: Check if user exists
+        const foundUser = await userServices.getUserById(String(seekerData.user));
+        if (!foundUser) {
+            return res.status(404).send("User not found");
+        }
+
         const createdSeeker = await seekerServices.createSeeker(req.body);
         res.status(200).send(createdSeeker);
     }

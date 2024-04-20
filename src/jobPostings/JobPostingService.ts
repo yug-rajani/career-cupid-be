@@ -21,26 +21,26 @@ export async function getJobPostingById(jobId: string): Promise<IJobPosting | nu
 }
 
 export async function updateJobPosting(jobId: string, updatedJobPosting: IJobPosting): Promise<IJobPosting | null> {
-    const updatedResult = await jobPostingDao.updateJobPosting(jobId, updatedJobPosting);
-    if (updatedResult.modifiedCount === 0) {
-     
-      return null;
-    }
-    return updatedJobPosting;
-  }
-  
+  const updatedResult = await jobPostingDao.updateJobPosting(jobId, updatedJobPosting);
+  if (updatedResult.modifiedCount === 0) {
 
-  export async function deleteJobPosting(jobId: string): Promise<boolean> {
-    const  DeleteResult = await jobPostingDao.deleteJobPosting(jobId);
-
-    if (DeleteResult.deletedCount && DeleteResult.deletedCount > 0) {
-      return true; 
-    } else {
-      return false;
-    }
+    return null;
   }
+  return updatedJobPosting;
+}
+
+
+export async function deleteJobPosting(jobId: string): Promise<boolean> {
+  const DeleteResult = await jobPostingDao.deleteJobPosting(jobId);
+
+  if (DeleteResult.deletedCount && DeleteResult.deletedCount > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 export async function getJobPostingsByFilter(filter: Record<string, any>): Promise<IJobPosting[]> {
-    const jobPostings = await jobPostingDao.findJobPostingsByFilter(filter);
-    return jobPostings;
-  }
+  const jobPostings = await jobPostingDao.findJobPostingsByFilter(filter);
+  return jobPostings;
+}

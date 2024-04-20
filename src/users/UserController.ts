@@ -31,45 +31,45 @@ export const confirmEmail = async (req: Request, res: Response) => {
 
 export const updateUser = async (req: Request, res: Response) => {
   const { userId } = req.params;
-    try {
-      const updatedUser = await userServices.updateUser(userId,req.body);
-      res.status(200).send(updatedUser);
-    } catch (error) {
-      return res.status(500).send(getErrorMessage(error));
-    }
+  try {
+    const updatedUser = await userServices.updateUser(userId, req.body);
+    res.status(200).send(updatedUser);
+  } catch (error) {
+    return res.status(500).send(getErrorMessage(error));
+  }
 };
 
 
 
 export const getAllUsers = async (req: Request, res: Response) => {
-    
-  try{
+
+  try {
     const users = await userServices.getAllUsers();
     res.status(200).send(users);
-  } catch(error){
-      return res.status(500).send(getErrorMessage(error));
+  } catch (error) {
+    return res.status(500).send(getErrorMessage(error));
   }
-  
+
 };
 
 export const getUserById = async (req: Request, res: Response) => {
   const { userId } = req.params;
-  try{
+  try {
     const user = await userServices.getUserById(userId);
     res.status(200).send(user);
-  } catch(error){
-      return res.status(500).send(getErrorMessage(error));
-  } 
+  } catch (error) {
+    return res.status(500).send(getErrorMessage(error));
+  }
 };
 
 
-export const deleteUser = async (req:Request, res:Response) => {
+export const deleteUser = async (req: Request, res: Response) => {
   const { userId } = req.params;
-  try{
+  try {
     const status = await userServices.deleteUser(userId);
     res.status(200).send(status);
-  } catch(error){
-      return res.status(500).send(getErrorMessage(error));
+  } catch (error) {
+    return res.status(500).send(getErrorMessage(error));
   }
-  
+
 };

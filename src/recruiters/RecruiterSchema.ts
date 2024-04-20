@@ -26,6 +26,7 @@ const RecruiterSchema: mongoose.Schema<IRecruiter> = new mongoose.Schema({
   bio: { type: String, required: true },
   profile_picture: { type: String, required: true },
   approved: { type: Boolean, default: false },
-});
+},
+  { collection: "recruiters" });
 
 export default RecruiterSchema;

@@ -4,6 +4,7 @@ import * as recruiterServices from "./RecruiterService";
 
 export const createRecruiter = async (req: Request, res: Response) => {
     try {
+        // TODO: Check if user exists
         const createdRecruiter = await recruiterServices.createRecruiter(req.body);
         res.status(200).send(createdRecruiter);
     }
