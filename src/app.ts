@@ -17,7 +17,7 @@ const port = 4000;
 // connect to database
 connectToDB();
 
-app.use("/api/v1", routes);
+app.use("/api/v1/", routes);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
