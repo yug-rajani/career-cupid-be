@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 export interface ISeeker extends mongoose.Document {
+    user: mongoose.Types.ObjectId;
     email: string;
     city: string;
     state: string;
@@ -16,6 +17,7 @@ export interface ISeeker extends mongoose.Document {
 }
 
 const SeekerSchema: mongoose.Schema<ISeeker> = new mongoose.Schema({
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     email: { type: String, unique: true, required: true, trim: true },
     city: { type: String, required: true, trim: true },
     state: { type: String, required: true, trim: true },

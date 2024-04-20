@@ -6,9 +6,17 @@ export const createRecruiter = (recruiter: IRecruiter) => {
   return recruiterModel.create(recruiter);
 };
 
-export const findAllRecruiters = () => recruiterModel.find();
-export const findRecruiterById = (recruiterId: String) => recruiterModel.findById(recruiterId);
-export const updateRecruiter = (recruiterId: String, recruiter: IRecruiter) =>
+export const findAllRecruiters = () =>
+  recruiterModel.find();
+
+export const findRecruiterById = (recruiterId: string) =>
+  recruiterModel.findById(recruiterId);
+
+export const updateRecruiter = (recruiterId: string, recruiter: IRecruiter) =>
   recruiterModel.updateOne({ _id: recruiterId }, { $set: recruiter });
-export const deleteRecruiter = (recruiterId: String) =>
+
+export const deleteRecruiter = (recruiterId: string) =>
   recruiterModel.deleteOne({ _id: recruiterId });
+
+export const findRecruiterByCriteria = (criteria) =>
+  recruiterModel.find(criteria);
