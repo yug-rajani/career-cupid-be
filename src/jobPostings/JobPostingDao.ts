@@ -12,3 +12,5 @@ export const updateJobPosting = (jobPostingId: String, jobPosting: IJobPosting) 
   jobPostingModel.updateOne({ _id: jobPostingId }, { $set: jobPosting });
 export const deleteJobPosting = (jobPostingId: String) =>
   jobPostingModel.deleteOne({ _id: jobPostingId });
+  export const findJobPostingsByFilter = (filter: Record<string, any>) =>
+  jobPostingModel.find(filter);
