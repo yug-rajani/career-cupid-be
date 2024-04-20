@@ -1,15 +1,16 @@
-import { UserModel, IUser } from "./UserModel";
+import { IUser } from "./UserSchema";
+import * as userDao from "./UserDao";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { SECRET_KEY } from "../middlewares/Auth";
 
 export async function register(user: IUser): Promise<IUser> {
-  const newUser = await UserModel.create(user);
+  const newUser = await userDao.createUser(user);
   return newUser;
 }
 
 export async function login(user: IUser) {
-  const foundUser = await UserModel.findOne({ email: user.email, role: user.role });
+  const foundUser = await userDao.findUserByCriteria({ email: user.email, role: user.role });
 
   if (!foundUser) {
     throw new Error("Email/Password incorrect");

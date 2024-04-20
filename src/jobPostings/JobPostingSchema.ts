@@ -1,26 +1,27 @@
 import mongoose from "mongoose";
 
 export interface IJobPosting extends mongoose.Document {
-    company: string;
-    title: string;
-    description: string;
-    city: string;
-    state: string;
-    country: string;
-    salary: number;
-    industry: string;
-    openings: number;
-    remote: boolean;
-    hybrid: boolean;
-    full_time: boolean;
-    created_at: number;
-    updated_at: number;
-    applicants: string[];
-    skills: string[];
-    experience: number;
+  company: string;
+  title: string;
+  description: string;
+  city: string;
+  state: string;
+  country: string;
+  salary: number;
+  industry: string;
+  openings: number;
+  remote: boolean;
+  hybrid: boolean;
+  full_time: boolean;
+  created_at: number;
+  updated_at: number;
+  applicants: string[];
+  skills: string[];
+  experience: number;
 }
 
-const JobPostingSchema: mongoose.Schema<IJobPosting> = new mongoose.Schema({
+const JobPostingSchema: mongoose.Schema<IJobPosting> = new mongoose.Schema(
+  {
     company: { type: String, required: true, trim: true },
     title: { type: String, required: true, trim: true },
     description: { type: String, required: true },
@@ -37,7 +38,9 @@ const JobPostingSchema: mongoose.Schema<IJobPosting> = new mongoose.Schema({
     updated_at: { type: Number, required: true, default: Date.now() },
     applicants: { type: [String], required: true },
     skills: { type: [String], required: true },
-    experience: { type: Number, required: true }
-});
+    experience: { type: Number, required: true },
+  },
+  { collection: "job_postings" }
+);
 
-export const JobPostingModel = mongoose.model<IJobPosting>("jobPostings", JobPostingSchema);
+export default JobPostingSchema;

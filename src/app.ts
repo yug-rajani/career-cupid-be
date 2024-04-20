@@ -1,7 +1,7 @@
 import express from "express";
 import { connectToDB } from "./configs/MongoConfig";
 import { routes } from "./routes";
-import bodyParser from 'body-parser';
+import bodyParser from "body-parser";
 import cors from "cors";
 
 const app = express();
@@ -9,8 +9,8 @@ app.use(cors());
 app.use(express.json());
 
 // body-parser
-app.use(bodyParser.json({ limit: '50mb', type: 'application/json' }));
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(bodyParser.json({ limit: "50mb", type: "application/json" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 const port = 4000;
 
