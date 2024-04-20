@@ -4,10 +4,10 @@ import { Router } from "express";
 
 const router = Router();
 
-router.post("/jobPosting", jobPostingController.createJobPosting);
-router.get("/jobPosting", jobPostingController.getAllJobPostings);
-router.get("/jobPosting/:jobId", jobPostingController.getJobPostingById);
-router.put("/jobPosting/:jobId", jobPostingController.updateJobPosting);
-router.delete("/jobPosting/:jobId", jobPostingController.deleteJobPosting);
+router.post("/jobPostings", jobPostingController.createJobPosting);
+router.get("/jobPostings", jobPostingController.getAllJobPostings);
+router.get("/jobPostings/:jobId", jobPostingController.getJobPostingById);
+router.put("/jobPostings/:jobId", jobPostingController.updateJobPosting);
+router.delete("/jobPostings/:jobId", jobPostingController.deleteJobPosting);
 
 export default router;

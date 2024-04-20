@@ -15,7 +15,7 @@ export interface IJobPosting extends mongoose.Document {
   full_time: boolean;
   created_at: number;
   updated_at: number;
-  applicants: string[];
+  applicants: mongoose.Types.ObjectId[]; 
   skills: string[];
   experience: number;
 }
@@ -36,7 +36,7 @@ const JobPostingSchema: mongoose.Schema<IJobPosting> = new mongoose.Schema(
     full_time: { type: Boolean, required: true, default: true },
     created_at: { type: Number, required: true, default: Date.now() },
     updated_at: { type: Number, required: true, default: Date.now() },
-    applicants: { type: [String], required: true },
+    applicants: { type: [mongoose.Schema.Types.ObjectId], ref: "seekers", required: true },
     skills: { type: [String], required: true },
     experience: { type: Number, required: true },
   },
