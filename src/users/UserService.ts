@@ -37,4 +37,34 @@ export async function login(user: IUser) {
   } else {
     throw new Error("Email/Password incorrect");
   }
+  
+}
+
+
+export async function deleteUser(userId: string): Promise<boolean> {
+  const deleteResult = await userDao.deleteUser(userId);
+  if (deleteResult.deletedCount && deleteResult.deletedCount > 0) {
+    return true; 
+  } else {
+    return false;
+  }
+}
+
+export async function getAllUsers(): Promise<IUser[]> {
+  const users = await userDao.findAllUsers();
+  return users;
+}
+
+export async function getUserById(userId: string): Promise<IUser | null> {
+  const user = await userDao.findUserById(userId);
+  return user;
+}
+
+export async function updateUser(userId: string, updatedUser: IUser): Promise<IUser | null> {
+  const updatedResult = await userDao.updateUser(userId, updatedUser);
+  if (updatedResult.modifiedCount === 0) {
+   
+    return null;
+  }
+  return updatedUser;
 }
