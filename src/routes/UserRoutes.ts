@@ -4,6 +4,7 @@ import { Router } from "express";
 const router = Router();
 
 router.post("/login", userController.login);
+router.post("/confirm-email", userController.confirmEmail);
 router.post("/register", userController.register);
 router.put("/users/:userId", userController.updateUser);
 router.delete("/users/:userId", userController.deleteUser);

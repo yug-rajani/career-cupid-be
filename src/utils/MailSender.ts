@@ -21,7 +21,7 @@ export const sendEmail = async (
     emailParams
   );
   const res = await mailjet.post("send", { version: "v3.1" }).request(request);
-  console.log(res.body);
+
   return res;
 };
 
@@ -55,4 +55,14 @@ const prepareEmail = (
   };
 };
 
-const prepareHtmlTemplate = (emailTemplate: String, emailParams: Map<String, String>) => {};
+const prepareHtmlTemplate = (emailTemplate: String, emailParams: Map<String, String>) => {
+  let preparedTemplate = emailTemplate;
+
+  // Replace placeholders in the template with values from emailParams
+  emailParams.forEach((value, key) => {
+    const regex = new RegExp("{{" + key + "}}", "g");
+    preparedTemplate = preparedTemplate.replace(regex, value.toString());
+  });
+
+  return preparedTemplate;
+};

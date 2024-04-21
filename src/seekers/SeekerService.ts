@@ -26,8 +26,8 @@ export async function deleteSeeker(seekerId: string): Promise<boolean> {
     }
 }
 
-export async function getSeekers(): Promise<ISeeker[]> {
-    return await seekerDao.findAllSeekers();
+export async function getSeekers(queryParams: Map<String, Object>): Promise<ISeeker[]> {
+    return await seekerDao.findAllSeekers(queryParams);
 }
 
 export async function getSeekerById(seekerId: string): Promise<ISeeker | null> {

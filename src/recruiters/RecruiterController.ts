@@ -1,10 +1,23 @@
 import { Request, Response } from "express";
 import { getErrorMessage } from "../utils/ErrorMessages";
 import * as recruiterServices from "./RecruiterService";
+import { IRecruiter } from "./RecruiterSchema";
+import * as userServices from "../users/UserService";
 
 export const createRecruiter = async (req: Request, res: Response) => {
     try {
-        // TODO: Check if user exists
+        const recruiterData: IRecruiter = req.body;
+
+        // Validate state and country fields
+        if (recruiterData.state.length !== 2 || recruiterData.country.length !== 2) {
+            return res.status(400).send("State and country must be two characters long");
+        }
+
+        // Check if user exists
+        const foundUser = await userServices.getUserById(String(recruiterData.user));
+        if (!foundUser) {
+            return res.status(404).send("User not found");
+        }
         const createdRecruiter = await recruiterServices.createRecruiter(req.body);
         res.status(200).send(createdRecruiter);
     }
