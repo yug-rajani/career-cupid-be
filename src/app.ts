@@ -1,6 +1,6 @@
 import express from "express";
-import { connectToDB } from "./src/configs/MongoConfig";
-import { routes } from "./src/routes";
+import { connectToDB } from "./configs/MongoConfig";
+import { routes } from "./routes";
 import bodyParser from "body-parser";
 import cors from "cors";
 
