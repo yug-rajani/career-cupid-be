@@ -33,7 +33,7 @@ export async function login(user: IUser) {
       }
     );
 
-    return { token: token };
+    return { token: token, user:foundUser };
   } else {
     throw new Error("Email/Password incorrect");
   }
