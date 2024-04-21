@@ -8,7 +8,12 @@ export const createSeeker = async (req: Request, res: Response) => {
     try {
         const seekerData: ISeeker = req.body;
 
-        // TODO: Check if user exists
+        // Validate state and country fields
+        if (seekerData.state.length !== 2 || seekerData.country.length !== 2) {
+            return res.status(400).send("State and country must be two characters long");
+        }
+
+        // Check if user exists
         const foundUser = await userServices.getUserById(String(seekerData.user));
         if (!foundUser) {
             return res.status(404).send("User not found");
