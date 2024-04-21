@@ -7,9 +7,9 @@ import * as seekerServices from "../seekers/SeekerService";
 export const updateJobPosting = async (req: Request, res: Response) => {
     const { jobId } = req.params;
     try {
-      const { applicant } = req.body;
+      const { applicants } = req.body;
       
-      for (const seekerId of applicant) {
+      for (const seekerId of applicants) {
         const seeker = await seekerServices.getSeekerById(seekerId);
         if (!seeker) {
           throw new Error(`Invalid seeker ID: ${seekerId}`);
@@ -57,15 +57,6 @@ export const getJobPostingById = async (req: Request, res: Response) => {
 
 export const createJobPosting = async (req, res) => {
     try {
-      const { applicant } = req.body;
-    
-      for (const seekerId of applicant) {
-        const seeker = await seekerServices.getSeekerById(seekerId);
-        if (!seeker) {
-          throw new Error(`Invalid seeker ID: ${seekerId}`);
-        }
-      }
-  
       const jobPosting = await jobPostingServices.createJobPosting(req.body);
       res.status(200).send(jobPosting);
     } catch (error) {
