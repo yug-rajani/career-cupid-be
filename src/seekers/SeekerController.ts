@@ -49,7 +49,7 @@ export const deleteSeeker = async (req: Request, res: Response) => {
 
 export const getSeekers = async (req: Request, res: Response) => {
     try {
-        const seekers = await seekerServices.getSeekers();
+        const seekers = await seekerServices.getSeekers(new Map<String, Object>);
         res.status(200).send(seekers);
     }
     catch (error) {

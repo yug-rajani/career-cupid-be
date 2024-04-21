@@ -23,3 +23,15 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     res.status(401).send("Please authenticate");
   }
 };
+
+export const decodeToken = async (token) => {
+  try {
+    if (!token) {
+      throw new Error();
+    }
+    const decoded = jwt.verify(token, SECRET_KEY);
+    return decoded;
+  } catch (err) {
+    throw new Error("Invalid token");
+  }
+};

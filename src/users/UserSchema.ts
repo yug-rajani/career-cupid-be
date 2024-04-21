@@ -14,6 +14,7 @@ export interface IUser extends mongoose.Document {
   email: string;
   created_at: number;
   updated_at: number;
+  disabled: boolean;
   role: Role;
 }
 
@@ -26,6 +27,7 @@ const UserSchema: mongoose.Schema<IUser> = new mongoose.Schema(
     email: { type: String, unique: true, required: true, trim: true },
     created_at: { type: Number, required: true, default: Date.now() },
     updated_at: { type: Number, required: true, default: Date.now() },
+    disabled: { type: Boolean, required: true, default: true },
     role: { type: String, default: Role.SEEKER, enum: Object.values(Role), required: true },
   },
   { collection: "users" }

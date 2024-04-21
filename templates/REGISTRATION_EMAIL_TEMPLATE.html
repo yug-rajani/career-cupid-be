@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Career Cupid!</title>
+    <style>
+      /* Add your custom styles here */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .logo {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .logo img {
+        max-width: 150px;
+      }
+      .message {
+        margin-bottom: 20px;
+      }
+      .cta {
+        text-align: center; /* Align content in the center */
+      }
+      .button {
+        display: inline-block;
+        background-color: #4c4faf; /* Updated color to blue */
+        color: white; /* Set text color to white */
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 20px; /* Set font size to 20px */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <h1>Welcome to Career Cupid</h1>
+      </div>
+      <div class="message">
+        <p>Hello {{firstname}} {{lastname}},</p>
+        <p>
+          Thank you for registering with Career Cupid! You're one step closer to finding your dream
+          career match.
+        </p>
+        <p>To complete your registration, please click the button below:</p>
+      </div>
+      <div class="cta">
+        <a
+          href="{{verification_url}}"
+          style="text-decoration: none; color: white; font-weight: 20px; font-size: medium"
+          class="button"
+          >Verify Email</a
+        >
+      </div>
+      <div class="footer">
+        <p>
+          If you have any questions or need assistance, feel free to contact us at
+          support@career-cupid.com.
+        </p>
+        <p>Best regards,<br />The Career Cupid Team</p>
+      </div>
+    </div>
+  </body>
+</html>
