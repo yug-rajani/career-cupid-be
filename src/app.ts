@@ -5,7 +5,10 @@ import bodyParser from "body-parser";
 import cors from "cors";
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: "*",
+}
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // body-parser
