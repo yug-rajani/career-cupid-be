@@ -36,6 +36,15 @@ const SeekerSchema: mongoose.Schema<ISeeker> = new mongoose.Schema(
 );
 
 //text criteria for search
-SeekerSchema.index({ job_titles: "text", skills: "text", bio: "text" });
+SeekerSchema.index({
+  job_titles: "text",
+  skills: "text",
+  bio: "text",
+  city: "text",
+  state: "text",
+  country: "text",
+  education: "text",
+  email: "text",
+});
 
 export default SeekerSchema;
