@@ -28,8 +28,9 @@ export const createSeeker = async (req: Request, res: Response) => {
 };
 
 export const updateSeeker = async (req: Request, res: Response) => {
+  const {seekerId}  = req.params;
   try {
-    const updatedSeeker = await seekerService.updateSeeker(req.params.id, req.body);
+    const updatedSeeker = await seekerService.updateSeeker(seekerId,req.body);
     res.status(200).send(updatedSeeker);
   } catch (error) {
     return res.status(500).send(getErrorMessage(error));
