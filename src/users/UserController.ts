@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { getErrorMessage } from "../utils/ErrorMessages";
 import * as userServices from "./UserService";
-import { decodeToken } from "../middlewares/Auth";
+import { decodeToken, getJWTToken } from "../middlewares/Auth";
 
 export const login = async (req: Request, res: Response) => {
   try {
@@ -42,7 +42,7 @@ export const updateUser = async (req: Request, res: Response) => {
 
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
-    const users = await userServices.getAllUsers(req.params);
+    const users = await userServices.getAllUsers(req.query);
     res.status(200).send(users);
   } catch (error) {
     return res.status(500).json(getErrorMessage(error));
@@ -64,6 +64,19 @@ export const deleteUser = async (req: Request, res: Response) => {
   try {
     const status = await userServices.deleteUser(userId);
     res.status(200).send(status);
+  } catch (error) {
+    return res.status(500).json(getErrorMessage(error));
+  }
+};
+
+export const getMyUser = async (req: Request, res: Response) => {
+  try {
+    if (req.header("Authorization") === undefined || req.header("Authorization") === null)
+      return {};
+    const token = await getJWTToken(req, res);
+    console.log(token);
+    const user = await userServices.getMyUser(token);
+    res.status(200).send(user);
   } catch (error) {
     return res.status(500).json(getErrorMessage(error));
   }

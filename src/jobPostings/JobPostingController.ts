@@ -1,37 +1,34 @@
-import * as jobPostingServices from './JobPostingService';
+import * as jobPostingServices from "./JobPostingService";
 import { Request, Response } from "express";
 import { getErrorMessage } from "../utils/ErrorMessages";
 import * as seekerServices from "../seekers/SeekerService";
 
-
 export const updateJobPosting = async (req: Request, res: Response) => {
-    const { jobId } = req.params;
-    try {
-      const { applicants } = req.body;
-      
-      for (const seekerId of applicants) {
-        const seeker = await seekerServices.getSeekerById(seekerId);
-        if (!seeker) {
-          throw new Error(`Invalid seeker ID: ${seekerId}`);
-        }
+  const { jobId } = req.params;
+  try {
+    const { applicants } = req.body;
+
+    for (const seekerId of applicants) {
+      const seeker = await seekerServices.getSeekerById(seekerId);
+      if (!seeker) {
+        throw new Error(`Invalid seeker ID: ${seekerId}`);
       }
-  
-      const updatedJobPosting = await jobPostingServices.updateJobPosting(jobId, req.body);
-      res.status(200).send(updatedJobPosting);
-    } catch (error) {
-      return res.status(500).send(getErrorMessage(error));
     }
-  };
-  
+
+    const updatedJobPosting = await jobPostingServices.updateJobPosting(jobId, req.body);
+    res.status(200).send(updatedJobPosting);
+  } catch (error) {
+    return res.status(500).send(getErrorMessage(error));
+  }
+};
 
 export const getAllJobPostings = async (req: Request, res: Response) => {
   try {
-    const jobPostings = await jobPostingServices.getAllJobPostings();
+    const jobPostings = await jobPostingServices.getAllJobPostings(req.query);
     res.status(200).send(jobPostings);
   } catch (error) {
     return res.status(500).send(getErrorMessage(error));
   }
-
 };
 
 export const deleteJobPosting = async (req: Request, res: Response) => {
@@ -42,7 +39,6 @@ export const deleteJobPosting = async (req: Request, res: Response) => {
   } catch (error) {
     return res.status(500).send(getErrorMessage(error));
   }
-
 };
 
 export const getJobPostingById = async (req: Request, res: Response) => {
@@ -56,24 +52,10 @@ export const getJobPostingById = async (req: Request, res: Response) => {
 };
 
 export const createJobPosting = async (req, res) => {
-    try {
-      const jobPosting = await jobPostingServices.createJobPosting(req.body);
-      res.status(200).send(jobPosting);
-    } catch (error) {
-      return res.status(500).send(getErrorMessage(error));
-    }
-  };
-  
-
-export const getJobPostingsByFilter = async (req: Request, res: Response) => {
-  const filter = req.body;
   try {
-    const jobPostings = await jobPostingServices.getJobPostingsByFilter(filter);
-    res.status(200).send(jobPostings);
+    const jobPosting = await jobPostingServices.createJobPosting(req.body);
+    res.status(200).send(jobPosting);
   } catch (error) {
     return res.status(500).send(getErrorMessage(error));
   }
 };
-
-
-

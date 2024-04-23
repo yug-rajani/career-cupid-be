@@ -20,6 +20,8 @@ export const findUserByCriteria = (queries: Object) => userModel.findOne(queries
 const getCriterias = (queryParams): Object => {
   let queries = {};
 
+  console.log(queries);
+
   if (queryParams.emails) {
     const emailsArr = queryParams.emails.split(",");
     queries["email"] = { $in: emailsArr };
