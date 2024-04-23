@@ -1,22 +1,23 @@
 import mongoose from "mongoose";
 
 export interface ISeeker extends mongoose.Document {
-    user: mongoose.Types.ObjectId;
-    email: string;
-    city: string;
-    state: string;
-    country: string;
-    created_at: number;
-    job_titles: string[];
-    skills: string[];
-    experience: number;
-    education: string;
-    resume: string;
-    bio: string;
-    profile_picture: string;
+  user: mongoose.Types.ObjectId;
+  email: string;
+  city: string;
+  state: string;
+  country: string;
+  created_at: number;
+  job_titles: string[];
+  skills: string[];
+  experience: number;
+  education: string;
+  resume: string;
+  bio: string;
+  profile_picture: string;
 }
 
-const SeekerSchema: mongoose.Schema<ISeeker> = new mongoose.Schema({
+const SeekerSchema: mongoose.Schema<ISeeker> = new mongoose.Schema(
+  {
     user: { type: mongoose.Schema.Types.ObjectId, ref: "Users", required: true },
     email: { type: String, unique: true, required: true, trim: true },
     city: { type: String, required: true, trim: true },
@@ -29,9 +30,12 @@ const SeekerSchema: mongoose.Schema<ISeeker> = new mongoose.Schema({
     education: { type: String, required: true },
     resume: { type: String, required: true },
     bio: { type: String, required: true },
-    profile_picture: { type: String, required: true }
-},
-    { collection: "seekers" }
+    profile_picture: { type: String, required: true },
+  },
+  { collection: "seekers" }
 );
+
+//text criteria for search
+SeekerSchema.index({ job_titles: "text", skills: "text", bio: "text" });
 
 export default SeekerSchema;

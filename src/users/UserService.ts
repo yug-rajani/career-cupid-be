@@ -92,15 +92,8 @@ export async function updateUser(userId: string, updatedUser: IUser): Promise<IU
 
 export async function confirmEmail(params): Promise<IUser | null> {
   const token = params.token;
-
   const verifyToken = await decodeToken(token);
-
-  console.log(verifyToken);
-
-
   const userId = verifyToken["userId"];
-
-  
   const user = await getUserById(userId);
 
   user.disabled = false;
@@ -111,6 +104,13 @@ export async function confirmEmail(params): Promise<IUser | null> {
   }
   return user;
 }
+
+export const getMyUser = async (token) => {
+  const userId = token["userId"];
+  const user = await getUserById(userId);
+  return user;
+}
+
 
 const generateJWTToken = (user: IUser) => {
   const token = jwt.sign(

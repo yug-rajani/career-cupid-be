@@ -2,7 +2,7 @@
   "name": "career-cupid-be",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/App.js",
+  "main": "dist/app.js",
   "scripts": {
     "dev": "nodemon App.ts",
     "start": "tsc && node dist/app.js",
@@ -24,6 +24,7 @@
   "dependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.6",
+    "@types/mongoose": "^5.11.97",
     "@types/node": "^20.11.30",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
