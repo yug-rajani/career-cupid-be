@@ -46,12 +46,13 @@ export async function approveRecruiterById(token, recruiterId: string): Promise<
   // Verify token
   const role = token.role;
 
-  if (!role || role !== "admin") {
+  if (!role || role !== "ADMIN") {
     throw new Error("Unauthorized");
   }
 
   const status = await recruiterDao.approveRecruiterById(recruiterId);
-  return getRecruiterById(recruiterId);
+  console.log(recruiterId);
+  return await recruiterDao.findRecruiterById(recruiterId);
 }
 
 export const getMyRecruiter = async (token): Promise<IRecruiter | null> => {

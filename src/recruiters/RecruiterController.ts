@@ -80,6 +80,7 @@ export const approveRecruiterById = async (req: Request, res: Response) => {
       token,
       req.params.recruiterId
     );
+    console.log(approvedRecruiter);
     res.status(200).send(approvedRecruiter);
   } catch (error) {
     return res.status(500).send(getErrorMessage(error));

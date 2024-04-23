@@ -1,7 +1,10 @@
 import { IJobPosting } from "./JobPostingSchema";
 import * as jobPostingDao from "./JobPostingDao";
+import { getMyRecruiter } from "../recruiters/RecruiterService";
 
-export async function createJobPosting(jobPosting: IJobPosting): Promise<IJobPosting> {
+export async function createJobPosting(token, jobPosting: IJobPosting): Promise<IJobPosting> {
+  let recruiter = await getMyRecruiter(token);
+  jobPosting.recruiterId = recruiter._id;
   const newJobPosting = await jobPostingDao.createJobPosting(jobPosting);
   return newJobPosting;
 }
@@ -27,7 +30,17 @@ export async function updateJobPosting(
   return updatedJobPosting;
 }
 
-export async function deleteJobPosting(jobId: string): Promise<boolean> {
+export async function deleteJobPosting(token, jobId: string): Promise<boolean> {
+  if (token.role !== "ADMIN") {
+    let recruiter = await getMyRecruiter(token);
+
+    let jobPosting = await getJobPostingById(jobId);
+
+    if (jobPosting.recruiterId !== recruiter._id) {
+      throw new Error("You are not authorized to delete this job posting");
+    }
+  }
+
   const DeleteResult = await jobPostingDao.deleteJobPosting(jobId);
 
   if (DeleteResult.deletedCount && DeleteResult.deletedCount > 0) {

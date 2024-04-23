@@ -2,6 +2,7 @@ import * as jobPostingService from "./JobPostingService";
 import { Request, Response } from "express";
 import { getErrorMessage } from "../utils/ErrorMessages";
 import * as seekerServices from "../seekers/SeekerService";
+import { getJWTToken } from "../middlewares/Auth";
 
 export const updateJobPosting = async (req: Request, res: Response) => {
   const { jobId } = req.params;
@@ -33,8 +34,9 @@ export const getAllJobPostings = async (req: Request, res: Response) => {
 
 export const deleteJobPosting = async (req: Request, res: Response) => {
   const { jobId } = req.params;
+  const token = await getJWTToken(req, res);
   try {
-    const status = await jobPostingService.deleteJobPosting(jobId);
+    const status = await jobPostingService.deleteJobPosting(token, jobId);
     res.status(200).send(status);
   } catch (error) {
     return res.status(500).send(getErrorMessage(error));
@@ -51,9 +53,10 @@ export const getJobPostingById = async (req: Request, res: Response) => {
   }
 };
 
-export const createJobPosting = async (req, res) => {
+export const createJobPosting = async (req: Request, res: Response) => {
   try {
-    const jobPosting = await jobPostingService.createJobPosting(req.body);
+    const token = await getJWTToken(req, res);
+    const jobPosting = await jobPostingService.createJobPosting(token, req.body);
     res.status(200).send(jobPosting);
   } catch (error) {
     return res.status(500).send(getErrorMessage(error));
