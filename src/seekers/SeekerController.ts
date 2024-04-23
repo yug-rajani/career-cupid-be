@@ -47,7 +47,6 @@ export const deleteSeeker = async (req: Request, res: Response) => {
 
 export const getSeekers = async (req: Request, res: Response) => {
   try {
-    console.log(req.query);
     const seekers = await seekerService.getSeekers(req.query);
     res.status(200).send(seekers);
   } catch (error) {
@@ -58,15 +57,6 @@ export const getSeekers = async (req: Request, res: Response) => {
 export const getSeekerById = async (req: Request, res: Response) => {
   try {
     const seeker = await seekerService.getSeekerById(req.params.id);
-    res.status(200).send(seeker);
-  } catch (error) {
-    return res.status(500).send(getErrorMessage(error));
-  }
-};
-
-export const getSeekersByFilter = async (req: Request, res: Response) => {
-  try {
-    const seeker = await seekerService.getSeekersByFilter(req.query);
     res.status(200).send(seeker);
   } catch (error) {
     return res.status(500).send(getErrorMessage(error));

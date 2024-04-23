@@ -27,8 +27,9 @@ export const createRecruiter = async (req: Request, res: Response) => {
 };
 
 export const updateRecruiter = async (req: Request, res: Response) => {
+  const { recruiterId } = req.params;
   try {
-    const updatedRecruiter = await recruiterService.updateRecruiter(req.params.id, req.body);
+    const updatedRecruiter = await recruiterService.updateRecruiter(recruiterId, req.body);
     res.status(200).send(updatedRecruiter);
   } catch (error) {
     return res.status(500).send(getErrorMessage(error));
@@ -36,8 +37,9 @@ export const updateRecruiter = async (req: Request, res: Response) => {
 };
 
 export const deleteRecruiter = async (req: Request, res: Response) => {
+  const { recruiterId } = req.params;
   try {
-    const deletedRecruiter = await recruiterService.deleteRecruiter(req.params.id);
+    const deletedRecruiter = await recruiterService.deleteRecruiter(recruiterId);
     res.status(200).send(deletedRecruiter);
   } catch (error) {
     return res.status(500).send(getErrorMessage(error));

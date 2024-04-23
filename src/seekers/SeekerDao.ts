@@ -17,14 +17,15 @@ export const updateSeeker = (seekerId: String, seeker: ISeeker) =>
 
 export const deleteSeeker = (seekerId: String) => seekerModel.deleteOne({ _id: seekerId });
 
-export const findSeekerByCriteria = (criteria: Object) => seekerModel.find(criteria);
-
 const getCriterias = (queryParams): Object => {
   let queries = {};
 
-  if (queryParams.emails) {
-    const emailsArr = queryParams.emails.split(",");
-    queries["email"] = { $in: emailsArr };
+  if (queryParams.email) {
+    queries["email"] = queryParams.email;
+  }
+
+  if (queryParams.user) {
+    queries["user"] = queryParams.user;
   }
 
   return queries;

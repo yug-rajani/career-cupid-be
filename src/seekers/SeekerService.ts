@@ -34,10 +34,6 @@ export async function getSeekerById(seekerId: string): Promise<ISeeker | null> {
   return await seekerDao.findSeekerById(seekerId);
 }
 
-export async function getSeekersByFilter(filter): Promise<ISeeker[] | null> {
-  return await seekerDao.findSeekerByCriteria(filter);
-}
-
 export const getMySeeker = async (token): Promise<ISeeker | null> => {
   const userId = token.userId;
   const seekers = await getSeekers({ user: userId });

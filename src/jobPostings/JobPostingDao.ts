@@ -13,7 +13,8 @@ export const findAllJobPostings = (queryParams) => {
 export const findJobPostingById = (jobPostingId: String) => jobPostingModel.findById(jobPostingId);
 export const updateJobPosting = (jobPostingId: String, jobPosting: IJobPosting) =>
   jobPostingModel.updateOne({ _id: jobPostingId }, { $set: jobPosting });
-export const deleteJobPosting = (jobPostingId: String) =>
+
+export const deleteJobPosting = (jobPostingId: string) =>
   jobPostingModel.deleteOne({ _id: jobPostingId });
 
 const getCriteria = (queryParams): Object => {
@@ -101,3 +102,14 @@ const getCriteria = (queryParams): Object => {
 
   return queries;
 };
+export const findJobPostingsByFilter = (filter: Record<string, unknown>) =>
+  jobPostingModel.find(filter);
+
+export const addApplicantToJobPosting = (jobPostingId: string, applicantId: string) =>
+  jobPostingModel.updateOne({ _id: jobPostingId }, { $push: { applicants: applicantId } });
+
+export const shortlistApplicantForJobPosting = (jobPostingId: string, applicantId: string) =>
+  jobPostingModel.updateOne(
+    { _id: jobPostingId },
+    { $push: { shortlisted_applicants: applicantId } }
+  );

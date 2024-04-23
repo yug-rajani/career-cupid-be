@@ -36,3 +36,32 @@ export async function deleteJobPosting(jobId: string): Promise<boolean> {
     return false;
   }
 }
+
+export async function getJobPostingsByFilter(
+  filter: Record<string, unknown>
+): Promise<IJobPosting[]> {
+  const jobPostings = await jobPostingDao.findJobPostingsByFilter(filter);
+  return jobPostings;
+}
+
+export async function addApplicantToJobPosting(
+  jobId: string,
+  applicantId: string
+): Promise<boolean> {
+  const updatedResult = await jobPostingDao.addApplicantToJobPosting(jobId, applicantId);
+  if (updatedResult.modifiedCount === 0) {
+    return false;
+  }
+  return true;
+}
+
+export async function shortlistApplicantForJobPosting(
+  jobId: string,
+  applicantId: string
+): Promise<boolean> {
+  const updatedResult = await jobPostingDao.shortlistApplicantForJobPosting(jobId, applicantId);
+  if (updatedResult.modifiedCount === 0) {
+    return false;
+  }
+  return true;
+}
