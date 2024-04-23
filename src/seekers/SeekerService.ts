@@ -26,7 +26,7 @@ export async function deleteSeeker(seekerId: string): Promise<boolean> {
     }
 }
 
-export async function getSeekers(queryParams: Map<String, Object>): Promise<ISeeker[]> {
+export async function getSeekers(queryParams): Promise<ISeeker[]> {
     return await seekerDao.findAllSeekers(queryParams);
 }
 
@@ -34,6 +34,4 @@ export async function getSeekerById(seekerId: string): Promise<ISeeker | null> {
     return await seekerDao.findSeekerById(seekerId);
 }
 
-export async function getSeekersByFilter(filter): Promise<ISeeker[] | null> {
-    return await seekerDao.findSeekerByCriteria(filter);
-}
+

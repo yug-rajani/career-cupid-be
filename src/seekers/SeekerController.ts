@@ -49,7 +49,7 @@ export const deleteSeeker = async (req: Request, res: Response) => {
 
 export const getSeekers = async (req: Request, res: Response) => {
     try {
-        const seekers = await seekerServices.getSeekers(new Map<String, Object>);
+        const seekers = await seekerServices.getSeekers(req.query);
         res.status(200).send(seekers);
     }
     catch (error) {
@@ -67,12 +67,4 @@ export const getSeekerById = async (req: Request, res: Response) => {
     }
 };
 
-export const getSeekersByFilter = async (req: Request, res: Response) => {
-    try {
-        const seeker = await seekerServices.getSeekersByFilter(req.query);
-        res.status(200).send(seeker);
-    }
-    catch (error) {
-        return res.status(500).send(getErrorMessage(error));
-    }
-};
+
