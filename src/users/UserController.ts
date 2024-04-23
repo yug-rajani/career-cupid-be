@@ -17,6 +17,7 @@ export const register = async (req: Request, res: Response) => {
     const createdUser = await userServices.register(req.body);
     res.status(200).send(createdUser);
   } catch (error) {
+    console.log(error);
     return res.status(500).json(getErrorMessage(error));
   }
 };
@@ -74,7 +75,6 @@ export const getMyUser = async (req: Request, res: Response) => {
     if (req.header("Authorization") === undefined || req.header("Authorization") === null)
       return {};
     const token = await getJWTToken(req, res);
-    console.log(token);
     const user = await userServices.getMyUser(token);
     res.status(200).send(user);
   } catch (error) {
