@@ -5,24 +5,24 @@ import * as seekerServices from "../seekers/SeekerService";
 
 
 export const updateJobPosting = async (req: Request, res: Response) => {
-    const { jobId } = req.params;
-    try {
-      const { applicants } = req.body;
-      
-      for (const seekerId of applicants) {
-        const seeker = await seekerServices.getSeekerById(seekerId);
-        if (!seeker) {
-          throw new Error(`Invalid seeker ID: ${seekerId}`);
-        }
+  const { jobId } = req.params;
+  try {
+    const { applicants } = req.body;
+
+    for (const seekerId of applicants) {
+      const seeker = await seekerServices.getSeekerById(seekerId);
+      if (!seeker) {
+        throw new Error(`Invalid seeker ID: ${seekerId}`);
       }
-  
-      const updatedJobPosting = await jobPostingServices.updateJobPosting(jobId, req.body);
-      res.status(200).send(updatedJobPosting);
-    } catch (error) {
-      return res.status(500).send(getErrorMessage(error));
     }
-  };
-  
+
+    const updatedJobPosting = await jobPostingServices.updateJobPosting(jobId, req.body);
+    res.status(200).send(updatedJobPosting);
+  } catch (error) {
+    return res.status(500).send(getErrorMessage(error));
+  }
+};
+
 
 export const getAllJobPostings = async (req: Request, res: Response) => {
   try {
@@ -56,14 +56,14 @@ export const getJobPostingById = async (req: Request, res: Response) => {
 };
 
 export const createJobPosting = async (req, res) => {
-    try {
-      const jobPosting = await jobPostingServices.createJobPosting(req.body);
-      res.status(200).send(jobPosting);
-    } catch (error) {
-      return res.status(500).send(getErrorMessage(error));
-    }
-  };
-  
+  try {
+    const jobPosting = await jobPostingServices.createJobPosting(req.body);
+    res.status(200).send(jobPosting);
+  } catch (error) {
+    return res.status(500).send(getErrorMessage(error));
+  }
+};
+
 
 export const getJobPostingsByFilter = async (req: Request, res: Response) => {
   const filter = req.body;
@@ -75,5 +75,24 @@ export const getJobPostingsByFilter = async (req: Request, res: Response) => {
   }
 };
 
+export const addApplicantToJobPosting = async (req: Request, res: Response) => {
+  const { jobId } = req.params;
+  try {
+    const { applicantId } = req.body;
+    const status = await jobPostingServices.addApplicantToJobPosting(jobId, applicantId);
+    res.status(200).send(status);
+  } catch (error) {
+    return res.status(500).send(getErrorMessage(error));
+  }
+};
 
-
+export const shortlistApplicantForJobPosting = async (req: Request, res: Response) => {
+  const { jobId } = req.params;
+  try {
+    const { applicantId } = req.body;
+    const status = await jobPostingServices.shortlistApplicantForJobPosting(jobId, applicantId);
+    res.status(200).send(status);
+  } catch (error) {
+    return res.status(500).send(getErrorMessage(error));
+  }
+};

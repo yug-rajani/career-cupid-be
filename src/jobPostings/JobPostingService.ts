@@ -1,19 +1,15 @@
 import { IJobPosting } from "./JobPostingSchema";
 import * as jobPostingDao from "./JobPostingDao";
 
-
-
 export async function createJobPosting(jobPosting: IJobPosting): Promise<IJobPosting> {
   const newJobPosting = await jobPostingDao.createJobPosting(jobPosting);
   return newJobPosting;
 }
 
-
 export async function getAllJobPostings(): Promise<IJobPosting[]> {
   const jobPostings = await jobPostingDao.findAllJobPostings();
   return jobPostings;
 }
-
 
 export async function getJobPostingById(jobId: string): Promise<IJobPosting | null> {
   const jobPosting = await jobPostingDao.findJobPostingById(jobId);
@@ -29,7 +25,6 @@ export async function updateJobPosting(jobId: string, updatedJobPosting: IJobPos
   return updatedJobPosting;
 }
 
-
 export async function deleteJobPosting(jobId: string): Promise<boolean> {
   const DeleteResult = await jobPostingDao.deleteJobPosting(jobId);
 
@@ -40,7 +35,23 @@ export async function deleteJobPosting(jobId: string): Promise<boolean> {
   }
 }
 
-export async function getJobPostingsByFilter(filter: Record<string, any>): Promise<IJobPosting[]> {
+export async function getJobPostingsByFilter(filter: Record<string, unknown>): Promise<IJobPosting[]> {
   const jobPostings = await jobPostingDao.findJobPostingsByFilter(filter);
   return jobPostings;
+}
+
+export async function addApplicantToJobPosting(jobId: string, applicantId: string): Promise<boolean> {
+  const updatedResult = await jobPostingDao.addApplicantToJobPosting(jobId, applicantId);
+  if (updatedResult.modifiedCount === 0) {
+    return false;
+  }
+  return true;
+}
+
+export async function shortlistApplicantForJobPosting(jobId: string, applicantId: string): Promise<boolean> {
+  const updatedResult = await jobPostingDao.shortlistApplicantForJobPosting(jobId, applicantId);
+  if (updatedResult.modifiedCount === 0) {
+    return false;
+  }
+  return true;
 }
