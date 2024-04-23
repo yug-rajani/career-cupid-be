@@ -53,4 +53,16 @@ const JobPostingSchema: mongoose.Schema<IJobPosting> = new mongoose.Schema(
   { collection: "job_postings" }
 );
 
+//text criteria for search
+JobPostingSchema.index({
+  title: "text",
+  description: "text",
+  company: "text",
+  city: "text",
+  state: "text",
+  country: "text",
+  industry: "text",
+  skills: "text",
+});
+
 export default JobPostingSchema;

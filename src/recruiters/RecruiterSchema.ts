@@ -32,6 +32,12 @@ const RecruiterSchema: mongoose.Schema<IRecruiter> = new mongoose.Schema(
 );
 
 //text criteria for search
-RecruiterSchema.index({ company: "text", bio: "text" });
+RecruiterSchema.index({
+  company: "text",
+  bio: "text",
+  city: "text",
+  state: "text",
+  country: "text",
+});
 
 export default RecruiterSchema;
