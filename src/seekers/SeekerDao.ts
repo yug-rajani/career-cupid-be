@@ -36,5 +36,9 @@ const getCriterias = (queryParams): Object => {
     queries["_id"] = { $in: queryParams.seekerIds.split(",") };
   }
 
+  if (queryParams.keyword) {
+    queries["$text"] = { $search: queryParams.keyword };
+  }
+
   return queries;
 };
