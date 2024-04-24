@@ -4,7 +4,7 @@ import * as seekerDao from "./SeekerDao";
 export async function createSeeker(seeker: ISeeker): Promise<ISeeker> {
   let currentSeeker = await seekerDao.findAllSeekers({ user: seeker.user });
   if (currentSeeker.length > 0) {
-    throw new Error("Seeker already exists");
+    return currentSeeker[0];
   }
 
   const newSeeker = await seekerDao.createSeeker(seeker);
