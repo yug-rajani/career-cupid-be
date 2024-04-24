@@ -1,8 +1,12 @@
-import { IRecruiter } from "./RecruiterSchema";
 import * as recruiterDao from "./RecruiterDao";
-import { decodeToken } from "../middlewares/Auth";
+import { IRecruiter } from "./RecruiterSchema";
 
 export async function createRecruiter(recruiter: IRecruiter): Promise<IRecruiter> {
+  let currentRecruiter = await recruiterDao.findAllRecruiters({ user: recruiter.user });
+  if (currentRecruiter.length > 0) {
+   return currentRecruiter[0];
+  }
+
   const newRecruiter = await recruiterDao.createRecruiter(recruiter);
   return newRecruiter;
 }
