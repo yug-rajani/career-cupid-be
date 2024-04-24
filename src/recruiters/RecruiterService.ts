@@ -3,6 +3,11 @@ import * as recruiterDao from "./RecruiterDao";
 import { decodeToken } from "../middlewares/Auth";
 
 export async function createRecruiter(recruiter: IRecruiter): Promise<IRecruiter> {
+  let currentRecruiter = await recruiterDao.findAllRecruiters({ user: recruiter.user });
+  if (currentRecruiter.length > 0) {
+    throw new Error("Recruiter already exists");
+  }
+
   const newRecruiter = await recruiterDao.createRecruiter(recruiter);
   return newRecruiter;
 }
