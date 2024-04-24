@@ -28,5 +28,9 @@ const getCriterias = (queryParams): Object => {
     queries["user"] = queryParams.user;
   }
 
+  if (queryParams.seekerIds) {
+    queries["_id"] = { $in: queryParams.seekerIds.split(",") };
+  }
+
   return queries;
 };
