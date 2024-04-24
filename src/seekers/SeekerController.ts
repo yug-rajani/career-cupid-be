@@ -28,9 +28,9 @@ export const createSeeker = async (req: Request, res: Response) => {
 };
 
 export const updateSeeker = async (req: Request, res: Response) => {
-  const {seekerId}  = req.params;
+  const { seekerId } = req.params;
   try {
-    const updatedSeeker = await seekerService.updateSeeker(seekerId,req.body);
+    const updatedSeeker = await seekerService.updateSeeker(seekerId, req.body);
     res.status(200).send(updatedSeeker);
   } catch (error) {
     return res.status(500).send(getErrorMessage(error));
@@ -66,8 +66,8 @@ export const getSeekerById = async (req: Request, res: Response) => {
 
 export const getMySeeker = async (req: Request, res: Response) => {
   try {
-    if (req.header("Authorization") === undefined || req.header("Authorization") === null)
-      return {};
+    let authorization = req.header("Authorization")?.replace("Bearer", "");
+    if (authorization.length === 0) return {};
     const token = await getJWTToken(req, res);
     const seeker = await seekerService.getMySeeker(token);
     res.status(200).send(seeker);

@@ -80,7 +80,6 @@ export const approveRecruiterById = async (req: Request, res: Response) => {
       token,
       req.params.recruiterId
     );
-    console.log(approvedRecruiter);
     res.status(200).send(approvedRecruiter);
   } catch (error) {
     return res.status(500).send(getErrorMessage(error));
@@ -89,8 +88,8 @@ export const approveRecruiterById = async (req: Request, res: Response) => {
 
 export const getMyRecruiter = async (req: Request, res: Response) => {
   try {
-    if (req.header("Authorization") === undefined || req.header("Authorization") === null)
-      return {};
+    let authorization = req.header("Authorization")?.replace("Bearer", "");
+    if (authorization.length === 0) return {};
     const token = await getJWTToken(req, res);
     const recruiter = await recruiterService.getMyRecruiter(token);
     res.status(200).send(recruiter);

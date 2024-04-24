@@ -10,7 +10,7 @@ router.get("/jobPostings/:jobId", jobPostingController.getJobPostingById);
 router.put("/jobPostings/:jobId", jobPostingController.updateJobPosting);
 router.delete("/jobPostings/:jobId", jobPostingController.deleteJobPosting);
 router.post("/jobPostings/:jobId/applicants", jobPostingController.addApplicantToJobPosting);
-router.post("/jobPostings/:jobId/shortlistApplicant", jobPostingController.shortlistApplicantForJobPosting);
+router.post("/jobPostings/:jobId/shortlist-applicants", jobPostingController.shortlistApplicantForJobPosting);
 
 
 export default router;

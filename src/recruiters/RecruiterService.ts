@@ -51,7 +51,6 @@ export async function approveRecruiterById(token, recruiterId: string): Promise<
   }
 
   const status = await recruiterDao.approveRecruiterById(recruiterId);
-  console.log(recruiterId);
   return await recruiterDao.findRecruiterById(recruiterId);
 }
 
