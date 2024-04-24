@@ -3,7 +3,7 @@ import * as jobPostingDao from "./JobPostingDao";
 import { getMyRecruiter } from "../recruiters/RecruiterService";
 
 export async function createJobPosting(token, jobPosting: IJobPosting): Promise<IJobPosting> {
-  let recruiter = await getMyRecruiter(token);
+  const recruiter = await getMyRecruiter(token);
   jobPosting.recruiterId = recruiter._id;
   const newJobPosting = await jobPostingDao.createJobPosting(jobPosting);
   return newJobPosting;
@@ -32,9 +32,8 @@ export async function updateJobPosting(
 
 export async function deleteJobPosting(token, jobId: string): Promise<boolean> {
   if (token.role !== "ADMIN") {
-    let recruiter = await getMyRecruiter(token);
-
-    let jobPosting = await getJobPostingById(jobId);
+    const recruiter = await getMyRecruiter(token);
+    const jobPosting = await getJobPostingById(jobId);
 
     if (jobPosting.recruiterId !== recruiter._id) {
       throw new Error("You are not authorized to delete this job posting");
@@ -60,21 +59,21 @@ export async function getJobPostingsByFilter(
 export async function addApplicantToJobPosting(
   jobId: string,
   applicantId: string
-): Promise<boolean> {
+): Promise<IJobPosting> {
   const updatedResult = await jobPostingDao.addApplicantToJobPosting(jobId, applicantId);
   if (updatedResult.modifiedCount === 0) {
-    return false;
+    throw new Error("Error applying to job posting");
   }
-  return true;
+  return jobPostingDao.findJobPostingById(jobId);
 }
 
 export async function shortlistApplicantForJobPosting(
   jobId: string,
   applicantId: string
-): Promise<boolean> {
+): Promise<IJobPosting> {
   const updatedResult = await jobPostingDao.shortlistApplicantForJobPosting(jobId, applicantId);
   if (updatedResult.modifiedCount === 0) {
-    return false;
+    throw new Error("Error shortlisting applicant for job posting");
   }
-  return true;
+  return jobPostingDao.findJobPostingById(jobId);
 }

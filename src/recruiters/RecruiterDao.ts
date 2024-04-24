@@ -27,6 +27,10 @@ export const approveRecruiterById = (recruiterId: string) =>
 const getCriteria = (queryParams): Object => {
   let queries = {};
 
+  if (queryParams.userIds) {
+    queries["user"] = { $in: queryParams.userIds.split(",")};
+  }
+
   if (queryParams.emails) {
     const emailsArr = queryParams.emails.split(",");
     queries["email"] = { $in: emailsArr };

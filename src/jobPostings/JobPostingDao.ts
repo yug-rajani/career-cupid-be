@@ -96,6 +96,10 @@ const getCriteria = (queryParams): Object => {
     queries["recruiterId"] = { $in: recruiterIdsArr };
   }
 
+  if (queryParams.jobPostingIds) {
+    const jobPostingIdsArr = queryParams.jobPostingIds.split(",");
+    queries["_id"] = { $in: jobPostingIdsArr };
+  }
   if (queryParams.keyword) {
     queries["$text"] = { $search: queryParams.keyword };
   }

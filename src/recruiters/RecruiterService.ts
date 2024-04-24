@@ -51,12 +51,11 @@ export async function approveRecruiterById(token, recruiterId: string): Promise<
   }
 
   const status = await recruiterDao.approveRecruiterById(recruiterId);
-  console.log(recruiterId);
   return await recruiterDao.findRecruiterById(recruiterId);
 }
 
 export const getMyRecruiter = async (token): Promise<IRecruiter | null> => {
   const userId = token.userId;
-  const recruiters = await getRecruiters({ user: userId });
+  const recruiters = await getRecruiters({ userIds: userId });
   return recruiters && recruiters.length > 0 ? recruiters[0] : null;
 };

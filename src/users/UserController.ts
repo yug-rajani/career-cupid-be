@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
+import { getJWTToken } from "../middlewares/Auth";
 import { getErrorMessage } from "../utils/ErrorMessages";
 import * as userServices from "./UserService";
-import { decodeToken, getJWTToken } from "../middlewares/Auth";
 
 export const login = async (req: Request, res: Response) => {
   try {
@@ -17,7 +17,6 @@ export const register = async (req: Request, res: Response) => {
     const createdUser = await userServices.register(req.body);
     res.status(200).send(createdUser);
   } catch (error) {
-    console.log(error);
     return res.status(500).json(getErrorMessage(error));
   }
 };
@@ -72,8 +71,11 @@ export const deleteUser = async (req: Request, res: Response) => {
 
 export const getMyUser = async (req: Request, res: Response) => {
   try {
-    if (req.header("Authorization") === undefined || req.header("Authorization") === null)
+    let authorization = req.header("Authorization")?.replace("Bearer", "");
+    if (authorization.trim().length === 0) {
       return {};
+    }
+
     const token = await getJWTToken(req, res);
     const user = await userServices.getMyUser(token);
     res.status(200).send(user);
