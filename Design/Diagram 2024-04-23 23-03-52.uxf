@@ -1,0 +1,83 @@
+<diagram program="umletino" version="15.1"><zoom_level>7</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>175</x><y>119</y><w>147</w><h>126</h></coordinates><panel_attributes>User
+--
+firstname: string
+lastname: string
+username: string
+password: string
+email: string
+created_at: number
+updated_at: number
+disabled: boolean
+role: Role</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>238</x><y>238</y><w>21</w><h>77</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>105</x><y>266</y><w>322</w><h>49</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;50;10;20;440;20;440;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>301</y><w>147</w><h>182</h></coordinates><panel_attributes>Admin
+--
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>168</x><y>301</y><w>147</w><h>182</h></coordinates><panel_attributes>Seeker
+--
+user: ObjectId
+email: string
+city: string
+state: string
+country: string
+created_at: number
+job_titles: string[]
+skills: string[]
+experience: number
+education: string
+resume: string
+bio: string
+profile_picture: string</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>336</x><y>301</y><w>147</w><h>182</h></coordinates><panel_attributes>Recruiter
+--
+user: ObjectId
+email: string
+company: string
+city: string
+state: string
+country: string
+created_at: number
+website: string
+bio: string
+profile_picture: string
+approved: boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>616</x><y>49</y><w>147</w><h>231</h></coordinates><panel_attributes>Job Posting
+--
+company: string
+title: string
+description: string
+city: string
+state: string
+country: string
+salary: number
+industry: string
+openings: number
+remote: boolean
+hybrid: boolean
+full_time: boolean
+created_at: number
+updated_at: number
+applicants: ObjectId[]
+skills: string[]
+experience: number
+recruiterId: ObjectId
+shortlisted_applicants: ObjectId[]
+company_logo: string</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>315</x><y>126</y><w>315</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>430;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>308</x><y>217</y><w>315</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>430;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>553</x><y>329</y><w>112</w><h>63</h></coordinates><panel_attributes>RecruiterToJobPosting
+--
+posts
+updates
+deletes</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>476</x><y>350</y><w>91</w><h>28</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=*</panel_attributes><additional_attributes>10;10;110;10</additional_attributes></element><element><id>Relation</id><coordinates><x>616</x><y>273</y><w>28</w><h>70</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=1</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>679</x><y>329</y><w>119</w><h>63</h></coordinates><panel_attributes>SeekerToJobPosting
+--
+applies</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>721</x><y>273</y><w>28</w><h>70</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=*</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>231</x><y>385</y><w>532</w><h>168</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=*</panel_attributes><additional_attributes>10;140;10;220;730;220;730;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>119</x><y>42</y><w>112</w><h>63</h></coordinates><panel_attributes>UserToUser
+--
+posts
+updates
+deletes</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>224</x><y>63</y><w>84</w><h>70</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=*</panel_attributes><additional_attributes>10;10;90;10;90;80</additional_attributes></element><element><id>Relation</id><coordinates><x>126</x><y>98</y><w>63</w><h>84</h></coordinates><panel_attributes>lt=-
+m1=*
+m2=1</panel_attributes><additional_attributes>10;10;10;90;70;90</additional_attributes></element></diagram>
